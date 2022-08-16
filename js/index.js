@@ -1,24 +1,24 @@
-// $('.button').click(function () {
-    //     $(this).addClass('active').siblings().removeClass('active');
-    // });
-  
-    var $grid = $('.gallery');
-    // init
-    $grid.isotope({
-    // options
-    itemSelector: '.image',
-    masonry: {
-    columnWidth: 40,
-    isFitWidth: true
+var waypoint = new Waypoint({
+  element: document.getElementById('Progress'),
+  handler: function(direction) {
+    let circleProgressBar = {
+      startAngle: -1.55,
+      size: 180,
+      value: 0.70,
+      thickness: 5,
+      fill: {color: "red"}
     }
-    });
-      
-      // change is-checked class on buttons
-      var $buttonGroup = $('.controls');
-      $buttonGroup.on( 'click', 'li', function( event ) {
-        $buttonGroup.find('.active').removeClass('active');
-        var $button = $( event.currentTarget );
-        $button.addClass('active');
-        var filterValue = $button.attr('data-filter');
-        $grid.isotope({ filter: filterValue });
-      });
+    
+    $('.circle .bar').circleProgress(circleProgressBar).on('circle-animation-progress', function (event, progress, stepValue) {
+      $(this).parent().find('span').text(String(stepValue.toFixed(2).substr(2)) + "%")
+    })
+    
+    $('.css .bar').circleProgress({
+      value: 0.60
+    })
+    
+    $('.js .bar').circleProgress({
+      value: 0.90
+    })
+  }, offset: "90%"
+})
